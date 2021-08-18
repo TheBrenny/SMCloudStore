@@ -27,5 +27,8 @@
   "homepage": "https://github.com/TheBrenny/SMCloudStore",
   "dependencies": {
     "@smcloudstore/core": "^0.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5"
   }
 }
