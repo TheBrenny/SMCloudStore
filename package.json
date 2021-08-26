@@ -1,51 +1,23 @@
 {
-  "name": "@smcloudstore/builder",
-  "private": true,
-  "version": "0.1.0",
-  "scripts": {
-    "bootstrap": "sh scripts/bootstrap.sh",
-    "compile": "npm run tsc",
-    "tsc": "sh scripts/compile.sh",
-    "test": "npm run compile && sh scripts/test.sh",
-    "tslint": "find packages/*/src -name *.ts -type f -exec './node_modules/.bin/tslint' {} \\;",
-    "eslint": "./node_modules/.bin/eslint -c .eslintrc.yml .",
-    "lint": "npm run tslint && npm run eslint",
-    "typedoc": "sh scripts/docs.sh",
-    "docs": "npm run typedoc",
-    "prepublishOnly": "npm run test"
-  },
+  "name": "@smcloudstore/aws-s3",
+  "version": "0.2.1",
+  "description": "AWS S3 library for SMCloudStore",
   "author": "Alessandro Segala (ItalyPaleAle)",
+  "homepage": "https://github.com/ItalyPaleAle/SMCloudStore/tree/master/packages/aws-s3",
   "license": "MIT",
-  "homepage": "https://github.com/ItalyPaleAle/SMCloudStore",
+  "main": "src/AwsS3Provider.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ItalyPaleAle/SMCloudStore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ItalyPaleAle/SMCloudStore/issues"
+  },
   "engines": {
     "node": ">= 8.9.1"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "@types/minio": "^7.0.1",
-    "@types/node": "^10.12.18",
-    "digest-stream": "^2.0.0",
-    "eslint": "^5.12.0",
-    "nyc": "13.1.0",
-    "lerna": "^3.10.7",
-    "mocha": "^5.2.0",
-    "mocha-lcov-reporter": "^1.3.0",
-    "randomstring": "^1.1.5",
-    "request": "^2.88.0",
-    "semver": "^5.6.0",
-    "source-map-support": "^0.5.10",
-    "tslint": "^5.12.1",
-    "typedoc": "^0.13.0",
-    "typedoc-plugin-monorepo": "^0.1.0",
-    "typescript": "^3.1.6"
+  "dependencies": {
+    "@smcloudstore/core": "^0.2.0",
+    "aws-sdk": "^2.388.0"
   },
-  "nyc": {
-    "include": [
-      "packages"
-    ],
-    "reporter": [
-      "html"
-    ],
-    "all": true  
-  }
 }
