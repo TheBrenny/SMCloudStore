@@ -19,5 +19,5 @@
   "dependencies": {
     "@smcloudstore/core": "^0.2.0",
     "aws-sdk": "^2.388.0"
-  },
+  }
 }
