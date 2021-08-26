@@ -112,13 +112,13 @@ class AwsS3Provider extends StorageProvider {
      * @async
      */
     createContainer(container, options) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             options = options || {};
             const methodOptions = {
                 ACL: ACLString(options.access),
                 Bucket: container
             };
-            this._client.createBucket(methodOptions, function (err, data) {
+            this._client.createBucket(methodOptions, (err, data) => {
                 if (err || !data || !data.Location) return reject(err || Error('Invalid response while creating container'));
                 resolve();
             });
@@ -132,11 +132,11 @@ class AwsS3Provider extends StorageProvider {
      * @async
      */
     isContainer(container) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             const methodOptions = {
                 Bucket: container
             };
-            this._client.headBucket(methodOptions, function (err, data) {
+            this._client.headBucket(methodOptions, (err, data) => {
                 if (err) {
                     // Check error code to see if bucket doesn't exist, or if someone else owns it
                     if (err.statusCode == 404) resolve(false); // Container doesn't exist
@@ -160,7 +160,7 @@ class AwsS3Provider extends StorageProvider {
     ensureContainer(container, options) {
         // First, check if the container exists
         return this.isContainer(container)
-            .then(function (exists) {
+            .then((exists) => {
                 // Create the container if it doesn't exist already
                 if (!exists) return this.createContainer(container, options);
             });
@@ -172,8 +172,8 @@ class AwsS3Provider extends StorageProvider {
      * @async
      */
     listContainers() {
-        return new Promise(function (resolve, reject) {
-            this._client.listBuckets(function (err, data) {
+        return new Promise((resolve, reject) => {
+            this._client.listBuckets((err, data) => {
                 if (err || !data || !data.Buckets) return reject(err || Error('Invalid response while listing containers'));
 
                 let list = [];
@@ -192,11 +192,11 @@ class AwsS3Provider extends StorageProvider {
      * @async
      */
     deleteContainer(container) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             const methodOptions = {
                 Bucket: container
             };
-            this._client.deleteBucket(methodOptions, function (err, data) {
+            this._client.deleteBucket(methodOptions, (err, data) => {
                 if (err || !data) return reject(err || Error('Invalid response while deleting container'));
                 resolve();
             });
@@ -214,7 +214,7 @@ class AwsS3Provider extends StorageProvider {
      */
     putObject(container, path, data, options) {
         options = options || {};
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             // Build all the methodOptions dictionary
             const methodOptions = Object.assign({
                 Body: data,
@@ -222,7 +222,7 @@ class AwsS3Provider extends StorageProvider {
                 Key: path
             }, PutObjectMethodOptions(options));
             // Send the request
-            this._client.putObject(methodOptions, function (err, response) {
+            this._client.putObject(methodOptions, (err, response) => {
                 if (err || !response || !response.ETag) return reject(err || Error('Invalid response while putting object'));
                 resolve();
             });
@@ -254,8 +254,8 @@ class AwsS3Provider extends StorageProvider {
      */
     listObjects(container, prefix) {
         const list = [];
-        const makeRequest = function (continuationToken) {
-            return new Promise(function (resolve, reject) {
+        const makeRequest = (continuationToken) => {
+            return new Promise((resolve, reject) => {
                 const methodOptions = {
                     Bucket: container,
                     ContinuationToken: continuationToken || undefined,
@@ -263,7 +263,7 @@ class AwsS3Provider extends StorageProvider {
                     MaxKeys: 500,
                     Prefix: prefix
                 };
-                this._client.listObjectsV2(methodOptions, function (err, data) {
+                this._client.listObjectsV2(methodOptions, (err, data) => {
                     if (err || !data || !data.KeyCount || !data.Contents) return reject(err || Error('Invalid response while putting object'));
                     // Add all objects
                     for (const el of data.Contents) {
@@ -299,12 +299,12 @@ class AwsS3Provider extends StorageProvider {
      * @async
      */
     deleteObject(container, path) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             const methodOptions = {
                 Bucket: container,
                 Key: path
             };
-            this._client.deleteObject(methodOptions, function (err, data) {
+            this._client.deleteObject(methodOptions, (err, data) => {
                 if (err || !data) return reject(err || Error('Invalid response while deleting object'));
                 resolve();
             });
@@ -355,8 +355,8 @@ class AwsS3Provider extends StorageProvider {
             Expires: ttl,
             Key: path
         }, additionalMethodOptions);
-        return new Promise(function (resolve, reject) {
-            this._client.getSignedUrl(operation, methodOptions, function (err, url) {
+        return new Promise((resolve, reject) => {
+            this._client.getSignedUrl(operation, methodOptions, (err, url) => {
                 if (err || !url) return reject(err || Error('Invalid result when generating the presigned url'));
                 resolve(url);
             });
