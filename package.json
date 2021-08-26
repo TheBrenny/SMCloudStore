@@ -1,17 +1,17 @@
 {
-  "name": "@smcloudstore/aws-s3",
+  "name": "smcloudstore-aws-s3",
   "version": "0.2.1",
   "description": "AWS S3 library for SMCloudStore",
-  "author": "Alessandro Segala (ItalyPaleAle)",
-  "homepage": "https://github.com/ItalyPaleAle/SMCloudStore/tree/master/packages/aws-s3",
+  "author": "TheBrenny <iam@justbrenny.me>",
+  "homepage": "https://github.com/TheBrenny/SMCloudStore/tree/awss3",
   "license": "MIT",
   "main": "src/AwsS3Provider.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ItalyPaleAle/SMCloudStore.git"
+    "url": "git+https://github.com/TheBrenny/SMCloudStore.git"
   },
   "bugs": {
-    "url": "https://github.com/ItalyPaleAle/SMCloudStore/issues"
+    "url": "https://github.com/TheBrenny/SMCloudStore/issues"
   },
   "engines": {
     "node": ">= 8.9.1"
